@@ -8,9 +8,9 @@ class TimerPage extends React.Component {
 
     // set the initial state
     this.state = {
-      seconds: 0,
-      minutes: 0,
-      hours: 0,
+      seconds: 59,
+      minutes: 59,
+      hours: 3,
       save: false,
       IntervalID: null,
       times: [],
