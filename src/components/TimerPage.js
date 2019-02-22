@@ -9,7 +9,8 @@ class TimerPage extends React.Component {
     this.state = {
       seconds: 0,
       minutes: 0,
-      hours: 0
+      hours: 0,
+      save: false
     };
   }
 
@@ -48,7 +49,8 @@ class TimerPage extends React.Component {
 
     // Save the interval ID
     this.setState({
-      IntervalID: IntervalID
+      IntervalID: IntervalID,
+      save: false
     });
   }
 
@@ -57,6 +59,14 @@ class TimerPage extends React.Component {
     console.log("Ending timer with id: " + this.state.IntervalID);
 
     clearInterval(this.state.IntervalID);
+
+    // Check to see if there is any time in the state before we display
+    // the save button
+    if (this.state.seconds + this.state.minutes + this.state.hours > 0) {
+      this.setState({
+        save: true
+      });
+    }
   }
 
   // Resets the timer
@@ -66,7 +76,8 @@ class TimerPage extends React.Component {
     this.setState({
       seconds: 0,
       minutes: 0,
-      hours: 0
+      hours: 0,
+      save: false
     });
   }
 
@@ -89,6 +100,12 @@ class TimerPage extends React.Component {
           {this.state.minutes}:{this.state.seconds < 10 ? 0 : ""}
           {this.state.seconds}
         </p>
+
+        {this.state.save && (
+          <button id="save-btn" className="btn btn-primary">
+            Save
+          </button>
+        )}
       </div>
     );
   }
