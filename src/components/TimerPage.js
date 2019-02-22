@@ -1,5 +1,6 @@
 import React from "react";
 import "../css/timerpage.css";
+import RecentHistory from "../components/RecentHistory";
 
 class TimerPage extends React.Component {
   constructor(props) {
@@ -122,8 +123,8 @@ class TimerPage extends React.Component {
 
     // If we get to this point, saving to the state should have been successful
     this.setState({
-      save: false,
-    })
+      save: false
+    });
     console.log("our state");
     console.log(this.state);
   }
@@ -131,22 +132,24 @@ class TimerPage extends React.Component {
   render() {
     return (
       <div>
-        <button className="btn btn-success" onClick={() => this.startTimer()}>
-          Start Timer
-        </button>
-        <button className="btn btn-danger" onClick={() => this.stopTimer()}>
-          Stop Timer
-        </button>
-        <button className="btn btn-warning" onClick={() => this.resetTimer()}>
-          Reset Timer
-        </button>
+        <div id="timer-container">
+          <button className="btn btn-success" onClick={() => this.startTimer()}>
+            Start Timer
+          </button>
+          <button className="btn btn-danger" onClick={() => this.stopTimer()}>
+            Stop Timer
+          </button>
+          <button className="btn btn-warning" onClick={() => this.resetTimer()}>
+            Reset Timer
+          </button>
 
-        <p id="timer">
-          {this.state.hours < 10 ? 0 : ""}
-          {this.state.hours}:{this.state.minutes < 10 ? 0 : ""}
-          {this.state.minutes}:{this.state.seconds < 10 ? 0 : ""}
-          {this.state.seconds}
-        </p>
+          <p id="timer">
+            {this.state.hours < 10 ? 0 : ""}
+            {this.state.hours}:{this.state.minutes < 10 ? 0 : ""}
+            {this.state.minutes}:{this.state.seconds < 10 ? 0 : ""}
+            {this.state.seconds}
+          </p>
+        </div>
 
         {this.state.save && (
           <div id="save-project-form">
@@ -161,7 +164,7 @@ class TimerPage extends React.Component {
                 });
               }}
             />
-            <small id="projectNameHelp" class="form-text text-muted">
+            <small id="projectNameHelp" className="form-text text-muted">
               This is what you will search to see your time history
             </small>
 
@@ -174,6 +177,8 @@ class TimerPage extends React.Component {
             </button>
           </div>
         )}
+
+        <RecentHistory times={this.state.times} />
       </div>
     );
   }

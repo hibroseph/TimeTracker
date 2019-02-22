@@ -8,19 +8,24 @@
 #timer {
   font-size: 20px;
   position: absolute;
-  left: 160px;
+  left: 157px;
 }
 
+#timer-container {
+  /* background-color: yellow; */
+  height: 100px;
+}
 #save-btn {
   position: absolute;
-  left: 110px;
+  left: 148px;
 }
 
 #save-project-form {
   position: relative;
-  top: 50px;
-  left: 40px;
-  width: 400px;
+
+  height: 150px;
+  padding: 40px;
+  /* background-color: blue; */
 }
 
 #inputProjectName {
