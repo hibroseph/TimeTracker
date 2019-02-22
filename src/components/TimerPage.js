@@ -11,7 +11,8 @@ class TimerPage extends React.Component {
       minutes: 0,
       hours: 0,
       save: false,
-      IntervalID: null
+      IntervalID: null,
+      times: []
     };
   }
 
@@ -65,7 +66,7 @@ class TimerPage extends React.Component {
 
     this.setState({
       IntervalID: null
-    })
+    });
     // Check to see if there is any time in the state before we display
     // the save button
     if (this.state.seconds + this.state.minutes + this.state.hours > 0) {
@@ -85,6 +86,41 @@ class TimerPage extends React.Component {
       hours: 0,
       save: false
     });
+  }
+
+  // Saves the current time
+  saveTime() {
+    console.log("Saving the current time");
+
+    var currentDate = new Date();
+
+    var date = {
+      Day: currentDate.getDay(),
+      Month: currentDate.getMonth(),
+      Year: currentDate.getFullYear()
+    }
+
+    var timeObj = {
+      projectName: "test", 
+      date: date,
+      seconds: this.state.seconds,
+      minutes: this.state.minutes,
+      hours: this.state.hours,
+    };
+    
+
+    console.log("Here is our time object")
+    console.log(timeObj);
+
+    this.setState(prevState => {
+      return {
+        times: [...prevState.times, timeObj]
+      }
+    });
+
+    console.log("our state");
+    console.log(this.state)
+
   }
 
   render() {
@@ -108,7 +144,11 @@ class TimerPage extends React.Component {
         </p>
 
         {this.state.save && (
-          <button id="save-btn" className="btn btn-primary">
+          <button
+            id="save-btn"
+            className="btn btn-primary"
+            onClick={() => this.saveTime()}
+          >
             Save
           </button>
         )}
