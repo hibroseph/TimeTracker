@@ -12,7 +12,8 @@ class TimerPage extends React.Component {
       hours: 0,
       save: false,
       IntervalID: null,
-      times: []
+      times: [],
+      projectName: null
     };
   }
 
@@ -92,35 +93,39 @@ class TimerPage extends React.Component {
   saveTime() {
     console.log("Saving the current time");
 
+    this;
+
     var currentDate = new Date();
 
     var date = {
       Day: currentDate.getDay(),
       Month: currentDate.getMonth(),
       Year: currentDate.getFullYear()
-    }
+    };
 
     var timeObj = {
-      projectName: "test", 
+      projectName: this.state.projectName,
       date: date,
       seconds: this.state.seconds,
       minutes: this.state.minutes,
-      hours: this.state.hours,
+      hours: this.state.hours
     };
-    
 
-    console.log("Here is our time object")
+    console.log("Here is our time object");
     console.log(timeObj);
 
     this.setState(prevState => {
       return {
         times: [...prevState.times, timeObj]
-      }
+      };
     });
 
+    // If we get to this point, saving to the state should have been successful
+    this.setState({
+      save: false,
+    })
     console.log("our state");
-    console.log(this.state)
-
+    console.log(this.state);
   }
 
   render() {
@@ -144,13 +149,30 @@ class TimerPage extends React.Component {
         </p>
 
         {this.state.save && (
-          <button
-            id="save-btn"
-            className="btn btn-primary"
-            onClick={() => this.saveTime()}
-          >
-            Save
-          </button>
+          <div id="save-project-form">
+            <input
+              type="text"
+              id="inputProjectName"
+              placeholder="Enter Project Name"
+              onChange={event => {
+                // update the state with every key press
+                this.setState({
+                  projectName: event.target.value
+                });
+              }}
+            />
+            <small id="projectNameHelp" class="form-text text-muted">
+              This is what you will search to see your time history
+            </small>
+
+            <button
+              id="save-btn"
+              className="btn btn-primary"
+              onClick={() => this.saveTime()}
+            >
+              Save
+            </button>
+          </div>
         )}
       </div>
     );

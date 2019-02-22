@@ -12,10 +12,17 @@
 }
 
 #save-btn {
+  position: absolute;
+  left: 110px;
+}
+
+#save-project-form {
   position: relative;
-  top: 30px;
-  left: 150px;
-  transition: opacity 0.25s ease-in-out;
-  -moz-transition: opacity 0.25s ease-in-out;
-  -webkit-transition: opacity 0.25s ease-in-out;
+  top: 50px;
+  left: 40px;
+  width: 400px;
+}
+
+#inputProjectName {
+  width: 300px;
 }
