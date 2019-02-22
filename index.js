@@ -1,1 +1,0 @@
-console.log("You're gay");
