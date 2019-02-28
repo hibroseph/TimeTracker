@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import "./css/app.css";
-import Container from "./container";
+import Container from "./components/container";
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 class Popup extends React.Component {
