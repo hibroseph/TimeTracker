@@ -83,7 +83,7 @@ class TimerPage extends React.Component {
         saveButton: false
       },
       IntervalID: null,
-      times: [],
+      timeSnippets: [],
       projectName: null
     };
 
@@ -270,7 +270,7 @@ class TimerPage extends React.Component {
       Year: currentDate.getFullYear()
     };
 
-    var timeObj = {
+    var currentTimeSnippet = {
       projectName: this.state.projectName,
       date: date,
       seconds: this.state.timer.seconds,
@@ -278,12 +278,27 @@ class TimerPage extends React.Component {
       hours: this.state.timer.hours
     };
 
-    console.log("Here is our time object");
-    console.log(timeObj);
+    let time_array = JSON.parse(localStorage.getItem('saved-time-snippets') || ' { "timeSnippets": [] }')
+
+ 
+    let newTimeSnippetsArray = {
+      timeSnippets: [
+        ...time_array.timeSnippets,
+        currentTimeSnippet
+      ]
+    }
+
+    console.log("newTimeSnippetsArray saved in localstorage")
+    console.log(newTimeSnippetsArray)
+
+    localStorage.setItem('saved-time-snippets', JSON.stringify(newTimeSnippetsArray))
+
+    console.log("Here is our snippet object");
+    console.log(currentTimeSnippet);
 
     this.setState(prevState => {
       return {
-        times: [...prevState.times, timeObj]
+        timeSnippets: [...prevState.timeSnippets, currentTimeSnippet]
       };
     });
 
@@ -349,7 +364,7 @@ class TimerPage extends React.Component {
           </div>
         )}
 
-        <RecentHistory times={this.state.times} />
+        <RecentHistory timeSnippets={this.state.timeSnippets}/>
       </div>
     );
   }

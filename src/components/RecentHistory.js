@@ -7,8 +7,8 @@ class RecentHistory extends React.Component {
     // console.log(this.props.times);
     return (
       <div id="recent-history-container">
-        <p>Recent History:</p>
-        {this.props.times.reverse().map(data => {
+        <p>This week</p>
+        {this.props.timeSnippets.reverse().map(data => {
           return (
             <p>
               {data.projectName} | 
