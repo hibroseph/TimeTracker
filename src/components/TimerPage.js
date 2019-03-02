@@ -72,6 +72,13 @@ class TimerPage extends React.Component {
         " seconds"
     );
 
+    // Load the recent history data
+    let storedTimeSnippets = JSON.parse(
+      localStorage.getItem("saved-time-snippets")
+    );
+
+    console.log(storedTimeSnippets);
+
     // set the initial state
     this.state = {
       timer: {
@@ -83,7 +90,7 @@ class TimerPage extends React.Component {
         saveButton: false
       },
       IntervalID: null,
-      timeSnippets: [],
+      timeSnippets: storedTimeSnippets.timeSnippets,
       projectName: null
     };
 
@@ -371,15 +378,20 @@ class TimerPage extends React.Component {
               Save
             </button>
 
-            <button id="close-btn"
-            className="btn btn-secondary"
-            onClick={()=> {
-              this.setState({
-                display: {
-                  saveButton: false
-                }
-              })
-            }}> Close</button>
+            <button
+              id="close-btn"
+              className="btn btn-secondary"
+              onClick={() => {
+                this.setState({
+                  display: {
+                    saveButton: false
+                  }
+                });
+              }}
+            >
+              {" "}
+              Close
+            </button>
           </div>
         )}
 

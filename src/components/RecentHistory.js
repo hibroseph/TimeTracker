@@ -3,8 +3,9 @@ import "../css/recenthistory.css";
 
 class RecentHistory extends React.Component {
   render() {
-    // console.log("props:");
-    // console.log(this.props.times);
+    console.log("RecentHistory props:")
+    console.log(this.props.timeSnippets)
+
     return (
       <div id="recent-history-container">
         {this.props.timeSnippets.length > 0 && (
@@ -20,6 +21,8 @@ class RecentHistory extends React.Component {
               </thead>
               <tbody>
                 {this.props.timeSnippets.reverse().map(data => {
+                  console.log("rendering:")
+                  console.log(data)
                   return (
                     <tr>
                       <th scope="row">{data.projectName}</th>
