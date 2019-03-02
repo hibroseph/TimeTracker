@@ -21,13 +21,22 @@
 }
 
 #save-project-form {
-  position: relative;
-
+  position: absolute;
   height: 150px;
   padding: 40px;
-  /* background-color: blue; */
+  z-index: 1;
+  background-color: #e6e6e6;
+  border-radius: 15px;
+  margin: 10px;
+  box-shadow: 10px 10px 79px -20px rgba(0, 0, 0, 0.75);
 }
 
-#inputProjectName {
+#save-project-form input {
   width: 300px;
+  background-color: inherit;
+  border: none;
 }
+
+/* #inputProjectName {
+  
+} */

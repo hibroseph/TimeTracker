@@ -278,20 +278,21 @@ class TimerPage extends React.Component {
       hours: this.state.timer.hours
     };
 
-    let time_array = JSON.parse(localStorage.getItem('saved-time-snippets') || ' { "timeSnippets": [] }')
+    let time_array = JSON.parse(
+      localStorage.getItem("saved-time-snippets") || ' { "timeSnippets": [] }'
+    );
 
- 
     let newTimeSnippetsArray = {
-      timeSnippets: [
-        ...time_array.timeSnippets,
-        currentTimeSnippet
-      ]
-    }
+      timeSnippets: [...time_array.timeSnippets, currentTimeSnippet]
+    };
 
-    console.log("newTimeSnippetsArray saved in localstorage")
-    console.log(newTimeSnippetsArray)
+    console.log("newTimeSnippetsArray saved in localstorage");
+    console.log(newTimeSnippetsArray);
 
-    localStorage.setItem('saved-time-snippets', JSON.stringify(newTimeSnippetsArray))
+    localStorage.setItem(
+      "saved-time-snippets",
+      JSON.stringify(newTimeSnippetsArray)
+    );
 
     console.log("Here is our snippet object");
     console.log(currentTimeSnippet);
@@ -357,14 +358,32 @@ class TimerPage extends React.Component {
             <button
               id="save-btn"
               className="btn btn-primary"
-              onClick={() => this.saveTime()}
+              onClick={() => {
+                this.saveTime();
+                // Close the popup
+                this.setState({
+                  display: {
+                    saveButton: false
+                  }
+                });
+              }}
             >
               Save
             </button>
+
+            <button id="close-btn"
+            className="btn btn-secondary"
+            onClick={()=> {
+              this.setState({
+                display: {
+                  saveButton: false
+                }
+              })
+            }}> Close</button>
           </div>
         )}
 
-        <RecentHistory timeSnippets={this.state.timeSnippets}/>
+        <RecentHistory timeSnippets={this.state.timeSnippets} />
       </div>
     );
   }

@@ -7,17 +7,52 @@ class RecentHistory extends React.Component {
     // console.log(this.props.times);
     return (
       <div id="recent-history-container">
-        <p>This week</p>
-        {this.props.timeSnippets.reverse().map(data => {
-          return (
-            <p>
-              {data.projectName} | 
-              {(data.hours > 0 && data.hours + " hours " )}
-              {(data.minutes > 0 && data.minutes + " minutes " )}
-              {data.seconds} seconds
-            </p>
-          );
-        })}
+        {this.props.timeSnippets.length > 0 && (
+          <div>
+            <p>This week</p>
+            <table className="table table-sm">
+              <thead>
+                <tr>
+                  <th scope="col">Project Name</th>
+                  <th scope="col">Date</th>
+                  <th scope="col">Time Spent</th>
+                </tr>
+              </thead>
+              <tbody>
+                {this.props.timeSnippets.reverse().map(data => {
+                  return (
+                    <tr>
+                      <th scope="row">{data.projectName}</th>
+                      <td>
+                        {data.date.Month}/{data.date.Day}/{data.date.Year}
+                      </td>
+                      <td>
+                        {data.hours > 0 && data.hours + ":"}
+                        {data.minutes > 0 && data.minutes + ":"}
+                        {data.hours == 0 && data.minutes == 0 && data.seconds + " seconds"}
+                      </td>
+                    </tr>
+                  );
+
+                  // return (
+                  //   <p>
+                  //     {data.projectName} |
+                  //     {data.hours > 0 && data.hours + " hours "}
+                  //     {data.minutes > 0 && data.minutes + " minutes "}
+                  //     {data.seconds} seconds
+                  //   </p>
+                  // );
+                })}
+              </tbody>
+            </table>
+          </div>
+        )}
+
+        {this.props.timeSnippets.length == 0 && (
+          <div>
+            <p> You haven't done any projects in the last week </p>
+          </div>
+        )}
       </div>
     );
   }
