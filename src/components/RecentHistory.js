@@ -1,5 +1,6 @@
 import React from "react";
 import "../css/recenthistory.css";
+import currentWeekNumber from "current-week-number";
 
 class RecentHistory extends React.Component {
   constructor(props) {
@@ -22,6 +23,10 @@ class RecentHistory extends React.Component {
   }
 
   render() {
+    // do some sort of check to see if they are within the past week
+    let date = new Date();
+    let currentWeek = currentWeekNumber(date);
+
     return (
       <div id="recent-history-container">
         {this.props.timeSnippets.length > 0 && (
@@ -37,21 +42,29 @@ class RecentHistory extends React.Component {
               </thead>
               <tbody>
                 {[...this.props.timeSnippets].reverse().map(data => {
-                  return (
-                    <tr>
-                      <th scope="row">{data.projectName}</th>
-                      <td>
-                        {data.date.Month}/{data.date.Day}/{data.date.Year}
-                      </td>
-                      <td>
-                        {data.hours > 0 && data.hours + ":"}
-                        {data.minutes > 0 && data.minutes + ":"}
-                        {data.hours == 0 &&
-                          data.minutes == 0 &&
-                          data.seconds + " seconds"}
-                      </td>
-                    </tr>
-                  );
+                  // console.log("currentWeek: " + currentWeek + " data.weekCreated: " + data.weekCreated);
+                  // console.log("current year: " + date.getFullYear() + " data.date.Year: " + data.date.Year);
+
+                  if (
+                    currentWeek == data.weekCreated &&
+                    date.getFullYear() == data.date.Year
+                  ) {
+                    return (
+                      <tr>
+                        <th scope="row">{data.projectName}</th>
+                        <td>
+                          {data.date.Month}/{data.date.Day}/{data.date.Year}
+                        </td>
+                        <td>
+                          {data.hours > 0 && data.hours + ":"}
+                          {data.minutes > 0 && data.minutes + ":"}
+                          {data.hours == 0 &&
+                            data.minutes == 0 &&
+                            data.seconds + " seconds"}
+                        </td>
+                      </tr>
+                    );
+                  }
                 })}
               </tbody>
             </table>

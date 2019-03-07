@@ -2,6 +2,7 @@ import React from "react";
 import "../css/timerpage.css";
 import RecentHistory from "../components/RecentHistory";
 import generateUUID from "../utils/generateUUID";
+import currentWeekNumber from "current-week-number"
 
 // Let's set the storage
 let storage = JSON.parse(localStorage.getItem("storage") || '{ "timer": []}');
@@ -267,14 +268,18 @@ class TimerPage extends React.Component {
     let uuid = generateUUID;
     console.log("The uuid is: " + uuid)
 
+    let currentWeek = currentWeekNumber(currentDate)
+    
+    console.log("The current week is: " + currentWeek);
+
     var currentTimeSnippet = {
         uuid: uuid,
         projectName: this.state.projectName,
         date: date,
         seconds: this.state.timer.seconds,
         minutes: this.state.timer.minutes,
-        hours: this.state.timer.hours
-      
+        hours: this.state.timer.hours,
+        weekCreated: currentWeek  
     };
 
     let time_array = JSON.parse(
