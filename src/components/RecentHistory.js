@@ -2,10 +2,26 @@ import React from "react";
 import "../css/recenthistory.css";
 
 class RecentHistory extends React.Component {
-  render() {
-    console.log("RecentHistory props:")
-    console.log(this.props.timeSnippets)
+  constructor(props) {
+    super(props);
+    this.state = {
+      timeSnippets: this.props.timeSnippets
+    };
+  }
 
+  // This helps with making sure there are not useless renders
+  shouldComponentUpdate(newProps, newState) {
+    if (newProps.timeSnippets == this.state.timeSnippets) {
+      return false;
+    } else {
+      this.setState({
+        timeSnippets: newProps.timeSnippets
+      });
+      return true;
+    }
+  }
+
+  render() {
     return (
       <div id="recent-history-container">
         {this.props.timeSnippets.length > 0 && (
@@ -20,9 +36,7 @@ class RecentHistory extends React.Component {
                 </tr>
               </thead>
               <tbody>
-                {this.props.timeSnippets.reverse().map(data => {
-                  console.log("rendering:")
-                  console.log(data)
+                {[...this.props.timeSnippets].reverse().map(data => {
                   return (
                     <tr>
                       <th scope="row">{data.projectName}</th>
@@ -32,19 +46,12 @@ class RecentHistory extends React.Component {
                       <td>
                         {data.hours > 0 && data.hours + ":"}
                         {data.minutes > 0 && data.minutes + ":"}
-                        {data.hours == 0 && data.minutes == 0 && data.seconds + " seconds"}
+                        {data.hours == 0 &&
+                          data.minutes == 0 &&
+                          data.seconds + " seconds"}
                       </td>
                     </tr>
                   );
-
-                  // return (
-                  //   <p>
-                  //     {data.projectName} |
-                  //     {data.hours > 0 && data.hours + " hours "}
-                  //     {data.minutes > 0 && data.minutes + " minutes "}
-                  //     {data.seconds} seconds
-                  //   </p>
-                  // );
                 })}
               </tbody>
             </table>

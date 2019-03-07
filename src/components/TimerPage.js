@@ -151,6 +151,14 @@ class TimerPage extends React.Component {
     });
   }
 
+  // shouldComponentUpdate(newProps, newState) {
+  //   console.log("Should the component update?");
+
+  //   console.log(newState);
+
+  //   return true;
+  // }
+
   // Starts the timer from whatever time it is at
   startTimer() {
     // Starts to call updateTimer every second
