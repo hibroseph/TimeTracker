@@ -42,9 +42,6 @@ class RecentHistory extends React.Component {
               </thead>
               <tbody>
                 {[...this.props.timeSnippets].reverse().map(data => {
-                  // console.log("currentWeek: " + currentWeek + " data.weekCreated: " + data.weekCreated);
-                  // console.log("current year: " + date.getFullYear() + " data.date.Year: " + data.date.Year);
-
                   if (
                     currentWeek == data.weekCreated &&
                     date.getFullYear() == data.date.Year
@@ -61,6 +58,7 @@ class RecentHistory extends React.Component {
                           {data.hours == 0 &&
                             data.minutes == 0 &&
                             data.seconds + " seconds"}
+                          {data.hours > 0 || (data.minutes > 0 && data.seconds)}
                         </td>
                       </tr>
                     );
