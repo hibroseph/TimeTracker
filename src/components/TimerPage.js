@@ -1,8 +1,7 @@
 import React from "react";
 import "../css/timerpage.css";
 import RecentHistory from "../components/RecentHistory";
-
-// localStorage.removeItem("storage");
+import generateUUID from "../utils/generateUUID";
 
 // Let's set the storage
 let storage = JSON.parse(localStorage.getItem("storage") || '{ "timer": []}');
@@ -74,8 +73,7 @@ class TimerPage extends React.Component {
 
     // Load the recent history data
     let storedTimeSnippets = JSON.parse(
-      localStorage.getItem("saved-time-snippets")
-    );
+      localStorage.getItem("saved-time-snippets") || '{ "timeSnippets": []}');
 
     console.log(storedTimeSnippets);
 
@@ -151,14 +149,6 @@ class TimerPage extends React.Component {
     });
   }
 
-  // shouldComponentUpdate(newProps, newState) {
-  //   console.log("Should the component update?");
-
-  //   console.log(newState);
-
-  //   return true;
-  // }
-
   // Starts the timer from whatever time it is at
   startTimer() {
     // Starts to call updateTimer every second
@@ -200,15 +190,6 @@ class TimerPage extends React.Component {
 
     console.log("The IntervalID in the state " + this.state.IntervalID);
   }
-
-  // let JSONOBJ = {
-  //   timer: [
-  //     {
-  //       start: 0,
-  //       end: 0
-  //     }
-  //   ]
-  // };
 
   // Ends the timer
   stopTimer() {
@@ -275,8 +256,6 @@ class TimerPage extends React.Component {
   saveTime() {
     console.log("Saving the current time");
 
-    this;
-
     var currentDate = new Date();
 
     var date = {
@@ -285,12 +264,17 @@ class TimerPage extends React.Component {
       Year: currentDate.getFullYear()
     };
 
+    let uuid = generateUUID;
+    console.log("The uuid is: " + uuid)
+
     var currentTimeSnippet = {
-      projectName: this.state.projectName,
-      date: date,
-      seconds: this.state.timer.seconds,
-      minutes: this.state.timer.minutes,
-      hours: this.state.timer.hours
+        uuid: uuid,
+        projectName: this.state.projectName,
+        date: date,
+        seconds: this.state.timer.seconds,
+        minutes: this.state.timer.minutes,
+        hours: this.state.timer.hours
+      
     };
 
     let time_array = JSON.parse(
