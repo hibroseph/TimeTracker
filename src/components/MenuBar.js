@@ -4,7 +4,12 @@ import "../css/menubar.css";
 class MenuBar extends React.Component {
   render() {
     return (
-      <div id="bar"></div>
+      <div id="nav">
+      <ul>
+        <li>Timer</li>
+        <li>Projects</li>
+      </ul>
+      </div>
     );
   }
 }

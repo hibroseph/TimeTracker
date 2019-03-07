@@ -1,5 +1,29 @@
-#bar {
+#nav {
     height: 50px;
     width:100%;
-    background-color: cornflowerblue
+    background-color: #007bff
+}
+
+#nav ul {
+    height: 100%;
+    list-style: none;
+    padding: 0px;
+    margin: 0px;
+    text-align:center;
+}
+
+#nav li {
+    display: inline-block;
+    font-family: Arial, Helvetica, sans-serif;
+    width: 200px;
+    padding: 10px;
+    transition: .3s, background-color;
+    height: 100%;
+    font-size: 1.3em;
+    font-weight: bold;
+    color: #f4f4f4;
+}
+
+#nav li:hover {
+    background-color: #0062cc;
 }
